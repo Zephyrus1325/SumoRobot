@@ -23,8 +23,8 @@ class Sensor{
 class Ultrassound : public Sensor {
     private:
     float distance;                     // Distancia lida pelo Sensor Ultrassonico em cm
-    const unsigned int triggerPin;      // Pino Trigger do Sensor
-    const unsigned int echoPin;         // Pino Echo do Sensor
+    unsigned int triggerPin;      // Pino Trigger do Sensor
+    unsigned int echoPin;         // Pino Echo do Sensor
     unsigned long maxTime = 2000;       // Tempo máximo que vai se esperar pelo echo do sensor em microssegundos
     timer updateTimer = {0, 1000, true, true, true};
 
@@ -35,7 +35,17 @@ class Ultrassound : public Sensor {
     Ultrassound(const unsigned int trigger, const unsigned int echo, const unsigned long updateTime) 
     : triggerPin(trigger), echoPin(echo){updateTimer = timer{0, updateTime, true, true, true};}
 
-    Ultrassound& operator=(const Ultrassound&){return *this;};
+    // Operador de atribuição
+    Ultrassound& operator=(const Ultrassound& other){
+        // Verifica auto-atribuição
+        if (this != &other) {  
+            this->triggerPin = other.triggerPin;
+            this->echoPin = other.echoPin;
+            this->maxTime = other.maxTime;
+            this->updateTimer = other.updateTimer;
+        }
+        return *this;
+    };
 
     //Inicializa o sensor
     void begin(){
@@ -85,7 +95,15 @@ class Infrared : public Sensor{
     Infrared(unsigned int pin, bool mode, unsigned int updateTime)
      : pin(pin), mode(mode){updateTimer = timer{0, updateTime, true, true, true};}
 
-    Infrared& operator=(const Infrared&){return *this;};
+    Infrared& operator=(const Infrared& other){
+        // Verifica auto-atribuição
+        if (this != &other) {  
+            this->pin = other.pin;
+            this->mode = other.mode;
+            this->updateTimer = other.updateTimer;
+        }
+        return *this;
+    };
 
     //Inicializa o sensor
     void begin(){
@@ -107,6 +125,19 @@ class Infrared : public Sensor{
 
     bool getState(){return state;}
     float getDistance(){return distance;}
+};
+
+
+// Eu vou me arrepender de fazer essa classe
+class InertialUnit : public Sensor{
+    private:
+
+    public:
+    // Atualiza as medições
+    void update(){
+
+    }
+
 };
 
 #endif

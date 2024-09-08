@@ -29,6 +29,7 @@ class SensorHandler{
             Ultrassound& sensor = ultrassoundSensors[i];
             sensor.update();
         }
+
         for(unsigned int i = 0; i < totalInfrared; i++){
             Infrared& sensor = infraredSensors[i];
             sensor.update();
