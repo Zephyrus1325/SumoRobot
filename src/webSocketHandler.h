@@ -22,6 +22,27 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             return;
         }
   
+        // Continuar codigo aqui!
+        const char *command = json["command"];
+        const char *value = json["value"];
+
+        if (strcmp(command, "calibrate_channel_1") == 0){
+            receiver.resetCalibration(0);
+        } else if (strcmp(command, "calibrate_channel_2") == 0){
+            receiver.resetCalibration(1);
+        } else if (strcmp(command, "calibrate_channel_3") == 0){
+            receiver.resetCalibration(2);
+        } else if (strcmp(command, "calibrate_channel_4") == 0){
+            receiver.resetCalibration(3);
+        } else if (strcmp(command, "calibrate_channel_5") == 0){
+            receiver.resetCalibration(4);
+        } else if (strcmp(command, "calibrate_channel_6") == 0){
+            receiver.resetCalibration(5);
+        } else if (strcmp(command, "calibrate_channel_7") == 0){
+            receiver.resetCalibration(6);
+        }else if (strcmp(command, "calibrate_channel_8") == 0){
+            receiver.resetCalibration(7);
+        }
     }
 }
 
