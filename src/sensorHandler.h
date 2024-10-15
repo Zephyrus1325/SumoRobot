@@ -1,5 +1,5 @@
-#ifndef SENSOR_HANDLER_H
-#define SENSOR_HANDLER_H
+#pragma once
+
 #include "sensors.h"
 /*--------------------------------------------------------------------------------------+
 |   Classe de Manipulador de Sensores - Marco Aurélio (08/09/2024)                      |
@@ -17,8 +17,7 @@ class SensorHandler{
     unsigned int totalUltrassound = 0;              // Total atual de sensores Ultrassonicos
     unsigned int totalInfrared = 0;                 // Total atual de sensores Infravermelho
     Ultrassound ultrassoundSensors[MAX_SENSORS];    // Lista com todos os sensores Ultrassonicos Criados
-    Infrared infraredSensors[MAX_SENSORS];          // Lista com todos os sensores Infravermelhos Criados   
-    
+    Infrared infraredSensors[MAX_SENSORS];          // Lista com todos os sensores Infravermelhos Criados                                // Unidade inercial criada
     public:
     SensorHandler(){}
 
@@ -40,6 +39,17 @@ class SensorHandler{
         Ultrassound& sensor = ultrassoundSensors[id];
         return sensor.getDistance();
     }
+
+    float getInfraredDistance(int id){
+        Infrared& sensor = infraredSensors[id];
+        return sensor.getDistance();
+    }
+
+    float getInfraredState(int id){
+        Infrared& sensor = infraredSensors[id];
+        return sensor.getState();
+    }
+
 
     /*-------------------------------------------------------------------------------------+
     | CUIDADO!! CUIDADO NOBRE PROGRAMADOR, CÓDIGO REPETITIVO A FRENTE                      |
@@ -81,5 +91,5 @@ class SensorHandler{
             totalInfrared++;
         }
     }
+
 };
-#endif

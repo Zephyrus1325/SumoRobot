@@ -1,7 +1,12 @@
-#ifndef SENSORS_H
-#define SENSORS_H
+#pragma once
+
+// Descomente esta linha para ativar o debug
+// (Mostrar todos os dados dos sensores no serial USB)
+//#define DEBUG
+
 #include <Arduino.h>
 #include "timer.h"
+
 /*------------------------------------------------------------+
 |   Classes de Sensores - Marco Aurélio (08/09/2024)          |
 |                                                             |
@@ -25,8 +30,10 @@ class Ultrassound : public Sensor {
     float distance;                     // Distancia lida pelo Sensor Ultrassonico em cm
     unsigned int triggerPin;      // Pino Trigger do Sensor
     unsigned int echoPin;         // Pino Echo do Sensor
-    unsigned long maxTime = 2000;       // Tempo máximo que vai se esperar pelo echo do sensor em microssegundos
-    timer updateTimer = {0, 1000, true, true, true};
+    unsigned long maxTime = 5882;       // Tempo máximo que vai se esperar pelo echo do sensor em microssegundos
+    unsigned long sentTime = 0;
+    bool waiting = false;
+    timer updateTimer = {0, 100, true, true, true};
 
 
     public:
@@ -62,12 +69,15 @@ class Ultrassound : public Sensor {
             digitalWrite(triggerPin, HIGH);
             delayMicroseconds(10);
             digitalWrite(triggerPin, LOW);
+            sentTime = micros();
+            waiting = true;
             // A aguarda pelo pino de echo e retorna o tempo até o pulso chegar
             unsigned long duration = pulseIn(echoPin, HIGH, maxTime);
             // retorna a distancia
             distance = duration * 0.034f / 2.0f;
         }
     }
+
 
     float getDistance(){return distance;}
     void setMaxTime(unsigned long time){maxTime = time;}
@@ -86,11 +96,11 @@ class Infrared : public Sensor{
     // usar o sensor Infravermelho nos dois modos ao mesmo tempo, por algum motivo
 
     public:
-    #define DIGITAL 0    // Sensor no modo Digital
-    #define ANALOG 1     // Sensor no modo Analogico
+    #define MODE_DIGITAL 0    // Sensor no modo Digital
+    #define MODE_ANALOG 1     // Sensor no modo Analogico
 
     Infrared() : pin(0){}
-    Infrared(unsigned int pin) : pin(pin){mode = DIGITAL;}
+    Infrared(unsigned int pin) : pin(pin){mode = MODE_DIGITAL;}
     Infrared(unsigned int pin, bool mode) : pin(pin), mode(mode){}
     Infrared(unsigned int pin, bool mode, unsigned int updateTime)
      : pin(pin), mode(mode){updateTimer = timer{0, updateTime, true, true, true};}
@@ -113,7 +123,7 @@ class Infrared : public Sensor{
     // Faz uma leitura do sensor
     void update(){
         if(updateTimer.CheckTime()){
-            if(ANALOG){
+            if(MODE_ANALOG){
                 distance = analogRead(pin);
                 state = false;
             } else {
@@ -126,18 +136,3 @@ class Infrared : public Sensor{
     bool getState(){return state;}
     float getDistance(){return distance;}
 };
-
-
-// Eu vou me arrepender de fazer essa classe
-class InertialUnit : public Sensor{
-    private:
-
-    public:
-    // Atualiza as medições
-    void update(){
-
-    }
-
-};
-
-#endif

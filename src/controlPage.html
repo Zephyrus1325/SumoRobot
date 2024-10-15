@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LabMaker Sumo Robot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<style>
+body {
+    background-color: #121212;
+    color: #f0ece2;
+}
+
+.indicator {
+    border-radius: 12px;
+	border: solid lightgray 2px;
+	height: 10%;
+	width: 100%;	
+	margin: 5px;
+    display: flex;
+    
+}
+
+.subjectTitle{
+    text-align: center;
+    color: white 3px;
+    margin-bottom: 0%;
+    font-size: 20px;
+    width: 100%;
+}
+
+.info{
+    border: solid lightgray 1px;
+    text-align: center;
+    width: 100%;
+    margin: 1px;
+}
+
+</style>
+</head>
+
+<body>
+    <div class="indicator">
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 1</p>
+                </div>
+                <div>
+                    <p id="indicator_calibration_max_channel_1" style="margin: 5px">Min: 1000</p>
+                    <p id="indicator_calibration_min_channel_1" style="margin: 5px">Max: 2000</p>
+                    <p id="indicator_calibration_mid_chaneel_1" style="margin: 5px">Mid: 1500</p>
+                    <p id="indicator_reading_channel_1" style="margin: 5px">Reading: 1000</p>
+                    <button id= "input_calibrate_channel_1"style="width: 100%; Height: 80px;">Calibrate</button>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 2</p>
+                </div>
+                <div>
+                    <p id="indicator_calibration_max_channel_2" style="margin: 5px">Min: 1000</p>
+                    <p id="indicator_calibration_min_channel_2" style="margin: 5px">Max: 2000</p>
+                    <p id="indicator_calibration_mid_chaneel_2" style="margin: 5px">Mid: 1500</p>
+                    <p id="indicator_reading_channel_2" style="margin: 5px">Reading: 1000</p>
+                    <button id= "input_calibrate_channel_2"style="width: 100%; Height: 80px;">Calibrate</button>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 3</p>
+                </div>
+                <div>
+                    <p id="indicator_calibration_max_channel_3" style="margin: 5px">Min: 1000</p>
+                    <p id="indicator_calibration_min_channel_3" style="margin: 5px">Max: 2000</p>
+                    <p id="indicator_calibration_mid_chaneel_3" style="margin: 5px">Mid: 1500</p>
+                    <p id="indicator_reading_channel_3" style="margin: 5px">Reading: 1000</p>
+                    <button id= "input_calibrate_channel_3"style="width: 100%; Height: 80px;">Calibrate</button>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 4</p>
+                </div>
+                <div>
+                    <p id="indicator_calibration_max_channel_4" style="margin: 5px">Min: 1000</p>
+                    <p id="indicator_calibration_min_channel_4" style="margin: 5px">Max: 2000</p>
+                    <p id="indicator_calibration_mid_chaneel_4" style="margin: 5px">Mid: 1500</p>
+                    <p id="indicator_reading_channel_4" style="margin: 5px">Reading: 1000</p>
+                    <button id= "input_calibrate_channel_4"style="width: 100%; Height: 80px;">Calibrate</button>
+                </div>
+            </div>
+    </div>        
+    <div class="indicator">
+
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 5</p>
+                </div>
+                <div>
+                    <p id="indicator_calibration_max_channel_5" style="margin: 5px">Min: 1000</p>
+                    <p id="indicator_calibration_min_channel_5" style="margin: 5px">Max: 2000</p>
+                    <p id="indicator_calibration_mid_chaneel_5" style="margin: 5px">Mid: 1500</p>
+                    <p id="indicator_reading_channel_5" style="margin: 5px">Reading: 1000</p>
+                    <button id= "input_calibrate_channel_5"style="width: 100%; Height: 80px;">Calibrate</button>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 6</p>
+                </div>
+                <div>
+                    <p id="indicator_calibration_max_channel_6" style="margin: 5px">Min: 1000</p>
+                    <p id="indicator_calibration_min_channel_6" style="margin: 5px">Max: 2000</p>
+                    <p id="indicator_calibration_mid_chaneel_6" style="margin: 5px">Mid: 1500</p>
+                    <p id="indicator_reading_channel_6" style="margin: 5px">Reading: 1000</p>
+                    <button id= "input_calibrate_channel_6"style="width: 100%; Height: 80px;">Calibrate</button>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 7</p>
+                </div>
+                <div>
+                    <p id="indicator_calibration_max_channel_7" style="margin: 5px">Min: 1000</p>
+                    <p id="indicator_calibration_min_channel_7" style="margin: 5px">Max: 2000</p>
+                    <p id="indicator_calibration_mid_chaneel_7" style="margin: 5px">Mid: 1500</p>
+                    <p id="indicator_reading_channel_7" style="margin: 5px">Reading: 1000</p>
+                    <button id= "input_calibrate_channel_7"style="width: 100%; Height: 80px;">Calibrate</button>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 8</p>
+                </div>
+                <div>
+                    <p id="indicator_calibration_max_channel_8" style="margin: 5px">Min: 1000</p>
+                    <p id="indicator_calibration_min_channel_8" style="margin: 5px">Max: 2000</p>
+                    <p id="indicator_calibration_mid_chaneel_8" style="margin: 5px">Mid: 1500</p>
+                    <p id="indicator_reading_channel_8" style="margin: 5px">Reading: 1000</p>
+                    <button id= "input_calibrate_channel_8"style="width: 100%; Height: 80px;">Calibrate</button>
+                </div>
+            </div>
+    </div>
+    <div class="indicator">
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Left Motor</p>
+                </div>
+                <div>
+                    <p id="indicator_motor_left_throttle">100% (255)</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Right Motor</p>
+                </div>
+                <div>
+                    <p id="indicator_motor_left_throttle">100% (255)</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Forward</p>
+                </div>
+                <div>
+                    <p id="indicator_forward">100% (255)</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Turning</p>
+                </div>
+                <div>
+                    <p id="indicator_turning">100% (255)</p>
+                </div>
+            </div>
+    </div>
+</body>
+
+<script>
+</script>
+
+</html>

@@ -1,0 +1,19 @@
+#pragma once
+
+#define PIN_RC_CHANNEL_1 2
+#define PIN_RC_CHANNEL_2 3
+#define PIN_RC_CHANNEL_3 4
+#define PIN_RC_CHANNEL_4 5
+#define PIN_RC_CHANNEL_5 6
+#define PIN_RC_CHANNEL_6 7
+#define PIN_RC_CHANNEL_7 8
+#define PIN_RC_CHANNEL_8 9
+#define PIN_IR_LEFT 10
+#define PIN_IR_FRONT_LEFT 11
+#define PIN_IR_FRONT_RIGHT 12
+#define PIN_IR_RIGHT 13
+#define PIN_MOTOR_LEFT_A 14
+#define PIN_MOTOR_LEFT_B 15
+#define PIN_MOTOR_RIGHT_A 16
+#define PIN_MOTOR_RIGHT_B 17
+#define PIN_MOTOR_THREAD 18
