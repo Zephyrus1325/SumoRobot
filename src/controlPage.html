@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LabMaker Sumo Robot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<style>
+body {
+    background-color: #121212;
+    color: #f0ece2;
+}
+
+.indicator {
+    border-radius: 12px;
+	border: solid lightgray 2px;
+	height: 10%;
+	width: 100%;	
+	margin: 5px;
+    display: flex;
+    
+}
+
+.subjectTitle{
+    text-align: center;
+    color: white 3px;
+    margin-bottom: 0%;
+    font-size: 20px;
+    width: 100%;
+}
+
+.info{
+    border: solid lightgray 1px;
+    text-align: center;
+    width: 100%;
+    margin: 1px;
+}
+
+</style>
+</head>
+
+<body>
+    <div class="indicator">
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 1</p>
+                </div>
+                <div>
+                    <p id="indicator_channel_1">1000</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 2</p>
+                </div>
+                <div>
+                    <p id="indicator_channel_2">1000</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 3</p>
+                </div>
+                <div>
+                    <p id="indicator_channel_3">1000</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 4</p>
+                </div>
+                <div>
+                    <p id="indicator_channel_4">1000</p>
+                </div>
+            </div>
+    </div>        
+    <div class="indicator">
+
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 5</p>
+                </div>
+                <div>
+                    <p id="indicator_channel_5">1000</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 6</p>
+                </div>
+                <div>
+                    <p id="indicator_channel_6">1000</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 7</p>
+                </div>
+                <div>
+                    <p id="indicator_channel_7">1000</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Channel 8</p>
+                </div>
+                <div>
+                    <p id="indicator_channel_8">1000</p>
+                </div>
+            </div>
+    </div>
+    <div class="indicator">
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Left Motor</p>
+                </div>
+                <div>
+                    <p id="indicator_motor_left_throttle">100% (255)</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Right Motor</p>
+                </div>
+                <div>
+                    <p id="indicator_motor_left_throttle">100% (255)</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Forward</p>
+                </div>
+                <div>
+                    <p id="indicator_forward">100% (255)</p>
+                </div>
+            </div>
+            <div class="info">
+                <div class="subjectTitle">
+                    <p>Turning</p>
+                </div>
+                <div>
+                    <p id="indicator_turning">100% (255)</p>
+                </div>
+            </div>
+    </div>
+    <div class="indicator">
+        <div class="info">
+            <div class="subjectTitle">
+                <p>IR Left</p>
+            </div>
+            <div >
+                <p id="indicator_infrared_left_calibration_low" style="margin: 5px">Cal Low: 100</p>
+                <p id="indicator_infrared_left_calibration_high" style="margin: 5px">Cal High: 500</p>
+                <p id="indicator_infrared_left_calibration_threshold" style="margin: 5px">Threshold: 350</p>
+                <p id="indicator_infrared_left_reading" style="margin: 5px">Reading: 430</p>
+                <p id="indicator_infrared_left_State" style="margin: 5px">State: ON</p>
+            </div>
+        </div>
+        <div class="info">
+            <div class="subjectTitle">
+                <p>IR Front Left</p>
+            </div>
+            <div >
+                <p id="indicator_infrared_front_left_calibration_low" style="margin: 5px">Cal Low: 100</p>
+                <p id="indicator_infrared_front_left_calibration_high" style="margin: 5px">Cal High: 500</p>
+                <p id="indicator_infrared_front_left_calibration_threshold" style="margin: 5px">Threshold: 350</p>
+                <p id="indicator_infrared_front_left_reading" style="margin: 5px">Reading: 430</p>
+                <p id="indicator_infrared_front_left_State" style="margin: 5px">State: ON</p>
+            </div>
+        </div>
+        <div class="info">
+            <div class="subjectTitle">
+                <p>IR Front Right</p>
+            </div>
+            <div >
+                <p id="indicator_infrared_front_right_calibration_low" style="margin: 5px">Cal Low: 100</p>
+                <p id="indicator_infrared_front_right_calibration_high" style="margin: 5px">Cal High: 500</p>
+                <p id="indicator_infrared_front_right_calibration_threshold" style="margin: 5px">Threshold: 350</p>
+                <p id="indicator_infrared_front_right_reading" style="margin: 5px">Reading: 430</p>
+                <p id="indicator_infrared_front_right_State" style="margin: 5px">State: ON</p>
+            </div>
+        </div>
+        <div class="info">
+            <div class="subjectTitle">
+                <p>IR Right</p>
+            </div>
+            <div >
+                <p id="indicator_infrared_right_calibration_low" style="margin: 5px">Cal Low: 100</p>
+                <p id="indicator_infrared_right_calibration_high" style="margin: 5px">Cal High: 500</p>
+                <p id="indicator_infrared_right_calibration_threshold" style="margin: 5px">Threshold: 350</p>
+                <p id="indicator_infrared_right_reading" style="margin: 5px">Reading: 430</p>
+                <p id="indicator_infrared_right_State" style="margin: 5px">State: ON</p>
+            </div>
+        </div>
+    </div>
+    <button style="width: 100%; Height: 80px;">Calibrate IR</button>
+</body>
+
+<script>
+</script>
+
+</html>
