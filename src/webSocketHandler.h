@@ -22,6 +22,7 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
             return;
         }
   
+<<<<<<< HEAD
         // Continuar codigo aqui!
         const char *command = json["command"];
         const char *value = json["value"];
@@ -43,6 +44,8 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
         }else if (strcmp(command, "calibrate_channel_8") == 0){
             receiver.resetCalibration(7);
         }
+=======
+>>>>>>> ebcda89ba25bc649980483570155a5a3e9bcf982
     }
 }
 

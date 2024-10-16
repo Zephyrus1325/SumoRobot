@@ -52,6 +52,7 @@ class Motor{
     // Atualiza coisas do motor como PID, velocidade, entre outros
     // ** Executar esta função todos os loops **
     void update(){
+<<<<<<< HEAD
         if(!motorMode){
             if(updateTimer.CheckTime()){
                 float error = setpoint - actualSpeed;
@@ -73,6 +74,44 @@ class Motor{
                 Serial.println(throttle);
                 #endif
             }
+=======
+        setSpeed(throttle);
+    }
+
+    void setThrottle(int t){
+        throttle = t;
+    }
+
+    void setMode(int mode){
+        motorMode = mode;
+        // Reseta a potencia caso aconteça de colocar no modo manual e o PID comandar alguma potencia ainda
+        PIDIntegral = 0;
+        lastUpdateTime = millis();
+        throttle = 0;     
+         
+    }
+
+    void setKp(float kp){
+        Kp = kp;
+    }
+
+    void setKi(float ki){
+        Ki = ki;
+    }
+
+    void setKd(float kd){
+        Kd = kd;
+    }
+
+    void resetIntegral(){
+        PIDIntegral = 0;
+    }
+
+    void setSetpoint(float speed){
+        setpoint = speed;
+        if(speed == 0){
+            PIDIntegral = 0;
+>>>>>>> ebcda89ba25bc649980483570155a5a3e9bcf982
         }
         setSpeed(throttle);
         if(millis() - lastEncoderTime > timeout){
@@ -115,6 +154,10 @@ class Motor{
         if(speed == 0){
             PIDIntegral = 0;
         }
+    }
+
+    float getSpeed(){
+        return actualSpeed;
     }
 
     float getSpeed(){

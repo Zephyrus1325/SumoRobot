@@ -1,5 +1,6 @@
 #pragma once
 
+<<<<<<< HEAD
 #define PIN_RC_CHANNEL_1 2
 #define PIN_RC_CHANNEL_2 3
 #define PIN_RC_CHANNEL_3 4
@@ -17,3 +18,22 @@
 #define PIN_MOTOR_RIGHT_A 16
 #define PIN_MOTOR_RIGHT_B 17
 #define PIN_MOTOR_THREAD 18
+=======
+#define PIN_RC_CHANNEL_1 34
+#define PIN_RC_CHANNEL_2 35
+#define PIN_RC_CHANNEL_3 32
+#define PIN_RC_CHANNEL_4 39
+#define PIN_RC_CHANNEL_5 37
+#define PIN_RC_CHANNEL_6 33
+#define PIN_RC_CHANNEL_7 25
+#define PIN_RC_CHANNEL_8 26
+#define PIN_MOTOR_LEFT_A 5
+#define PIN_MOTOR_LEFT_B 4
+#define PIN_MOTOR_LEFT_PWM 2
+#define PIN_MOTOR_RIGHT_A 21
+#define PIN_MOTOR_RIGHT_B 19
+#define PIN_MOTOR_RIGHT_PWM 18
+
+
+#define PIN_SERVO_RAMP 4
+>>>>>>> ebcda89ba25bc649980483570155a5a3e9bcf982
