@@ -52,33 +52,7 @@ class Motor{
     // Atualiza coisas do motor como PID, velocidade, entre outros
     // ** Executar esta função todos os loops **
     void update(){
-        if(!motorMode){
-            if(updateTimer.CheckTime()){
-                float error = setpoint - actualSpeed;
-                float PIDderivative = (actualSpeed - lastSpeed) * (millis() - lastUpdateTime);
-                PIDIntegral += error * (millis() - lastUpdateTime);
-
-                float proportional = Kp * error;
-                float integral = Ki * PIDIntegral;
-                float derivative = Kd * PIDderivative;
-
-                throttle = (int)(proportional + integral + derivative);
-
-                lastUpdateTime = millis();
-
-                #ifdef DEBUG
-                Serial.print("Actual Speed: ");
-                Serial.print(actualSpeed);
-                Serial.print(" Throttle: ");
-                Serial.println(throttle);
-                #endif
-            }
-        }
         setSpeed(throttle);
-        if(millis() - lastEncoderTime > timeout){
-            actualSpeed = 0;
-        }
-        
     }
 
     void setThrottle(int t){
