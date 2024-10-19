@@ -7,16 +7,13 @@ class Receiver{
     uint16_t reading[8];
     uint16_t lastTime[8] = {0,0,0,0,0,0,0,0};
     uint16_t activeTime[8] = {0,0,0,0,0,0,0,0};
-<<<<<<< HEAD
     
     
-=======
     uint16_t calibration_min[8] = {990, 1000, 1000, 1000, 1000, 1000, 1000, 1000};
     uint16_t calibration_mid[8] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
     uint16_t calibration_max[8] = {1800, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
     uint8_t calibrationMask = 0b00000000; // Mascara de calibração dos sensores
 
->>>>>>> ebcda89ba25bc649980483570155a5a3e9bcf982
     public:
     Receiver(uint8_t pin_c1, uint8_t pin_c2, uint8_t pin_c3, uint8_t pin_c4, uint8_t pin_c5, uint8_t pin_c6, uint8_t pin_c7, uint8_t pin_c8){
         pin_channel[0] = pin_c1;
@@ -33,6 +30,7 @@ class Receiver{
     void begin(){
         for(int i = 0; i < 8; i++){
             pinMode(pin_channel[i], INPUT);
+            resetCalibration(i);
         }
     }
 
@@ -44,11 +42,6 @@ class Receiver{
         }
     }
 
-<<<<<<< HEAD
-    uint16_t read(uint8_t channel){
-        return reading[channel];
-    }
-=======
     void update(){
         for(int i = 0; i < 8; i++){
             if(read(i) > calibration_max[i] && read(i) < 2100){
@@ -107,5 +100,4 @@ class Receiver{
         return calibration_max[channel];
     }
 
->>>>>>> ebcda89ba25bc649980483570155a5a3e9bcf982
 };
