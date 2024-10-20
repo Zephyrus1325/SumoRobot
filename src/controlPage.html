@@ -2,7 +2,6 @@
 <html>
 <head>
 <title>LabMaker Sumo Robot</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
 body {
@@ -10,189 +9,244 @@ body {
     color: #f0ece2;
 }
 
-.indicator {
-    border-radius: 12px;
-	border: solid lightgray 2px;
-	height: 10%;
-	width: 100%;	
-	margin: 5px;
-    display: flex;
-    
+div {
+    border: solid rgb(239, 255, 254) 1px;
 }
 
-.subjectTitle{
-    text-align: center;
-    color: white 3px;
-    margin-bottom: 0%;
-    font-size: 20px;
-    width: 100%;
+
+button {
+    width: 90%;
+    height: 20px;
+    margin-top: 5px;
+    border-radius: 3px;
 }
 
-.info{
-    border: solid lightgray 1px;
+.info {
+    border: solid gray 2px;
+    width: 25%;
+    height: 25px;
+    padding: 0px;
+    padding-bottom: 5px;
     text-align: center;
-    width: 100%;
-    margin: 1px;
 }
+
+.info_text {
+    border: solid gray 2px;
+    height: 100%;
+    width: 25%;
+    margin: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.header {
+    border: solid gray 2px;
+    height: 100%;
+    width: 25%;
+    margin: 0px;
+}
+
 
 </style>
 </head>
 
 <body>
-    <div class="indicator">
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Channel 1</p>
-                </div>
-                <div>
-                    <p id="indicator_channel_1">1000</p>
-                </div>
+    <div style="display: flex;">
+        <!--Lado Esquerdo, com as informações visuais de controle-->
+        <div style="width:60%">
+            <!--Titulo-->
+            <div style="display: flex">
+                <p style="width: 80%; text-align:center">Robo Sumo LabMaker Team V0.1</p>
+                <p style="width: 20%; text-align:center">Latency: 100 ms</p>
             </div>
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Channel 2</p>
-                </div>
-                <div>
-                    <p id="indicator_channel_2">1000</p>
-                </div>
-            </div>
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Channel 3</p>
-                </div>
-                <div>
-                    <p id="indicator_channel_3">1000</p>
-                </div>
-            </div>
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Channel 4</p>
-                </div>
-                <div>
-                    <p id="indicator_channel_4">1000</p>
-                </div>
-            </div>
-    </div>        
-    <div class="indicator">
+            <!--Canvas-->
+            <canvas width="300" height="280" style="width: 100%; height: 90%; background-color: rgb(134, 134, 134); padding: 0%"></canvas>
 
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Channel 5</p>
+            
+        </div>
+
+
+        <!--Lado Direito, com as informações numéricas e ações possiveis-->
+        <div style="width:40%">
+            <!-- Informações e calibração de controle -->
+            <div style="padding: 10px;">
+                <!-- Cabeçalho -->
+                <div style="display: flex; text-align: center;">
+                        <p class="header" style="width: 10%">Ch</p>
+                        <p class="header">Raw Data</p>
+                        <p class="header">Calib Min</p>
+                        <p class="header">Calib Max</p>
+                        <p class="header">Calib Status</p>
                 </div>
-                <div>
-                    <p id="indicator_channel_5">1000</p>
+                <!-- Canal 1 -->
+                <div style="display: flex; text-align: center;">
+                    <p class="info_text" style="width: 10%">1</p>
+                    <p class="info_text" id="indicator_channel_1_raw">1500</p>
+                    <p class="info_text" id="indicator_channel_1_calibration_min">1000</p>
+                    <p class="info_text" id="indicator_channel_1_calibration_max">2000</p>
+                    <button class="info_text"id="input_calibrate_channel_1">OFF</button> 
+                </div>
+                <!-- Canal 2 -->
+                <div style="display: flex; text-align: center;">
+                    <p class="info_text" style="width: 10%">2</p>
+                    <p class="info_text" id="indicator_channel_2_raw">1500</p>
+                    <p class="info_text" id="indicator_channel_2_calibration_min">1000</p>
+                    <p class="info_text" id="indicator_channel_2_calibration_max">2000</p>
+                    <button class="info_text"id="input_calibrate_channel_2">OFF</button> 
+                </div>
+                <!-- Canal 3 -->
+                <div style="display: flex; text-align: center;">
+                    <p class="info_text" style="width: 10%">3</p>
+                    <p class="info_text" id="indicator_channel_3_raw">1500</p>
+                    <p class="info_text" id="indicator_channel_3_calibration_min">1000</p>
+                    <p class="info_text" id="indicator_channel_3_calibration_max">2000</p>
+                    <button class="info_text"id="input_calibrate_channel_3">OFF</button> 
+                </div>
+                <!-- Canal 4 -->
+                <div style="display: flex; text-align: center;">
+                    <p class="info_text" style="width: 10%">4</p>
+                    <p class="info_text" id="indicator_channel_4_raw">1500</p>
+                    <p class="info_text" id="indicator_channel_4_calibration_min">1000</p>
+                    <p class="info_text" id="indicator_channel_4_calibration_max">2000</p>
+                    <button class="info_text"id="input_calibrate_channel_4">OFF</button> 
+                </div>
+                <!-- Canal 5 -->
+                <div style="display: flex; text-align: center;">
+                    <p class="info_text" style="width: 10%">5</p>
+                    <p class="info_text" id="indicator_channel_5_raw">1500</p>
+                    <p class="info_text" id="indicator_channel_5_calibration_min">-</p>
+                    <p class="info_text" id="indicator_channel_5_calibration_max">-</p>
+                    <button class="info_text"id="input_calibrate_channel_5">OFF</button> 
+                </div>
+                <!-- Canal 6 -->
+                <div style="display: flex; text-align: center;">
+                    <p class="info_text" style="width: 10%">6</p>
+                    <p class="info_text" id="indicator_channel_6_raw">1500</p>
+                    <p class="info_text" id="indicator_channel_6_calibration_min">-</p>
+                    <p class="info_text" id="indicator_channel_6_calibration_max">-</p>
+                    <button class="info_text"id="input_calibrate_channel_6">OFF</button> 
                 </div>
             </div>
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Channel 6</p>
+            <!-- Customização de controles -->
+            <!-- Throttle -->
+            <div style="padding: 10px;">
+                <!-- Cabeçalho -->
+                <div style="text-align:center;">
+                    <p style="margin:0; padding:5px">Throttle</p>
                 </div>
-                <div>
-                    <p id="indicator_channel_6">1000</p>
+                <!-- SubCabecalho -->
+                <div style="display: flex; text-align: center;">
+                    <p class="header" style="width: 15%">Chnnl</p>
+                    <p class="header">Linearity</p>
+                    <p class="header">RevButton</p>
+                    <p class="header">BttnChannel</p>
+                    <p class="header" style="width: 15%">-</p>
                 </div>
-            </div>
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Channel 7</p>
+                <!-- Customização -->
+                <div style="display: flex; text-align: center;">
+                    <select class="info_text" name="cars" id="cars" style="width: 15%; text-align: center">
+                        <option value="1">Ch 1</option>
+                        <option value="2">Ch 2</option>
+                        <option value="3">Ch 3</option>
+                        <option value="4">Ch 4</option>
+                        <option value="5">Ch 5</option>
+                        <option value="6">Ch 6</option>
+                    </select>
+                    <input class="info_text" type="number">
+                    <input class="info_text" style="height: auto;" type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                    <select class="info_text" name="cars" id="cars"  style="text-align: center">
+                        <option value="1">Ch 1</option>
+                        <option value="2">Ch 2</option>
+                        <option value="3">Ch 3</option>
+                        <option value="4">Ch 4</option>
+                        <option value="5">Ch 5</option>
+                        <option value="6">Ch 6</option>
+                    </select>
+                    <button class="info_text" style="width: 15%" id="input_calibrate_channel_1">Send</button> 
                 </div>
-                <div>
-                    <p id="indicator_channel_7">1000</p>
+                <!-- FeedBack -->
+                <div style="display: flex; text-align: center;">
+                    <p class="info_text" style="width: 15%">Ch 1</p>
+                    <p class="info_text">0.95</p>
+                    <p class="info_text">0</p>
+                    <p class="info_text">Ch 6</p>
+                    <p class="info_text" style="width: 15%">-</p>
                 </div>
-            </div>
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Channel 8</p>
+            </div>  
+
+            <!-- Steering -->
+            <div style="padding: 10px;">
+                <!-- Cabeçalho -->
+                <div style="text-align:center;">
+                    <p style="margin:0; padding:5px">Steering</p>
                 </div>
-                <div>
-                    <p id="indicator_channel_8">1000</p>
+                <!-- SubCabecalho -->
+                <div style="display: flex; text-align: center;">
+                    <p class="header" style="width: 50%">Channel</p>
+                    <p class="header">Linearity</p>
+                    <p class="header">-</p>
                 </div>
-            </div>
+                <!-- Customização -->
+                <div style="display: flex; text-align: center;">
+                    <select class="info_text" name="cars" id="cars" style="width: 50%; text-align: center">
+                        <option value="1">Ch 1</option>
+                        <option value="2">Ch 2</option>
+                        <option value="3">Ch 3</option>
+                        <option value="4">Ch 4</option>
+                        <option value="5">Ch 5</option>
+                        <option value="6">Ch 6</option>
+                    </select>
+                    <input class="info_text" type="number">
+                    <button class="info_text" id="input_calibrate_channel_1">Send</button> 
+                </div>
+                <!-- FeedBack -->
+                <div style="display: flex; text-align: center;">
+                    <p class="info_text" style="width: 50%">Ch 1</p>
+                    <p class="info_text">0.95</p>
+                    <p class="info_text">-</p>
+                </div>
+            </div>  
+
+            <!-- Controle de Rampa -->
+            <div style="padding: 10px;">
+                <!-- Cabeçalho -->
+                <div style="text-align:center;">
+                    <p style="margin:0; padding:5px">Ramp Control</p>
+                </div>
+                <!-- SubCabecalho -->
+                <div style="display: flex; text-align: center;">
+                    <p class="header">Channel</p>
+                    <p class="header">Min</p>
+                    <p class="header">Max</p>
+                    <p class="header">-</p>
+                </div>
+                <!-- Customização -->
+                <div style="display: flex; text-align: center;">
+                    <select class="info_text" name="cars" id="cars" style="text-align: center">
+                        <option value="1">Ch 1</option>
+                        <option value="2">Ch 2</option>
+                        <option value="3">Ch 3</option>
+                        <option value="4">Ch 4</option>
+                        <option value="5">Ch 5</option>
+                        <option value="6">Ch 6</option>
+                    </select>
+                    <input class="info_text" type="number">
+                    <input class="info_text" type="number">
+                    <button class="info_text"id="input_calibrate_channel_1">Send</button> 
+                </div>
+                <!-- FeedBack -->
+                <div style="display: flex; text-align: center;">
+                    <p class="info_text">Ch 6</p>
+                    <p class="info_text">40</p>
+                    <p class="info_text">60</p>
+                    <p class="info_text">-</p>
+                </div>
+            </div>  
+        </div>         
     </div>
-    <div class="indicator">
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Left Motor</p>
-                </div>
-                <div>
-                    <p id="indicator_motor_left_throttle">100% (255)</p>
-                </div>
-            </div>
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Right Motor</p>
-                </div>
-                <div>
-                    <p id="indicator_motor_left_throttle">100% (255)</p>
-                </div>
-            </div>
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Forward</p>
-                </div>
-                <div>
-                    <p id="indicator_forward">100% (255)</p>
-                </div>
-            </div>
-            <div class="info">
-                <div class="subjectTitle">
-                    <p>Turning</p>
-                </div>
-                <div>
-                    <p id="indicator_turning">100% (255)</p>
-                </div>
-            </div>
-    </div>
-    <div class="indicator">
-        <div class="info">
-            <div class="subjectTitle">
-                <p>IR Left</p>
-            </div>
-            <div >
-                <p id="indicator_infrared_left_calibration_low" style="margin: 5px">Cal Low: 100</p>
-                <p id="indicator_infrared_left_calibration_high" style="margin: 5px">Cal High: 500</p>
-                <p id="indicator_infrared_left_calibration_threshold" style="margin: 5px">Threshold: 350</p>
-                <p id="indicator_infrared_left_reading" style="margin: 5px">Reading: 430</p>
-                <p id="indicator_infrared_left_State" style="margin: 5px">State: ON</p>
-            </div>
-        </div>
-        <div class="info">
-            <div class="subjectTitle">
-                <p>IR Front Left</p>
-            </div>
-            <div >
-                <p id="indicator_infrared_front_left_calibration_low" style="margin: 5px">Cal Low: 100</p>
-                <p id="indicator_infrared_front_left_calibration_high" style="margin: 5px">Cal High: 500</p>
-                <p id="indicator_infrared_front_left_calibration_threshold" style="margin: 5px">Threshold: 350</p>
-                <p id="indicator_infrared_front_left_reading" style="margin: 5px">Reading: 430</p>
-                <p id="indicator_infrared_front_left_State" style="margin: 5px">State: ON</p>
-            </div>
-        </div>
-        <div class="info">
-            <div class="subjectTitle">
-                <p>IR Front Right</p>
-            </div>
-            <div >
-                <p id="indicator_infrared_front_right_calibration_low" style="margin: 5px">Cal Low: 100</p>
-                <p id="indicator_infrared_front_right_calibration_high" style="margin: 5px">Cal High: 500</p>
-                <p id="indicator_infrared_front_right_calibration_threshold" style="margin: 5px">Threshold: 350</p>
-                <p id="indicator_infrared_front_right_reading" style="margin: 5px">Reading: 430</p>
-                <p id="indicator_infrared_front_right_State" style="margin: 5px">State: ON</p>
-            </div>
-        </div>
-        <div class="info">
-            <div class="subjectTitle">
-                <p>IR Right</p>
-            </div>
-            <div >
-                <p id="indicator_infrared_right_calibration_low" style="margin: 5px">Cal Low: 100</p>
-                <p id="indicator_infrared_right_calibration_high" style="margin: 5px">Cal High: 500</p>
-                <p id="indicator_infrared_right_calibration_threshold" style="margin: 5px">Threshold: 350</p>
-                <p id="indicator_infrared_right_reading" style="margin: 5px">Reading: 430</p>
-                <p id="indicator_infrared_right_State" style="margin: 5px">State: ON</p>
-            </div>
-        </div>
-    </div>
-    <button style="width: 100%; Height: 80px;">Calibrate IR</button>
+    <p style="margin: 0px; padding: 0px">Design By: Enzo Mandelli</p>
+    <p style="margin: 0px; padding: 0px">Electronics By: Enzo Agnez</p>
+    <p style="margin: 0px; padding: 0px">Code By: Marco Aurelio Tiago Filho & Julia Almeida</p>
 </body>
 
 <script>
