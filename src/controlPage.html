@@ -57,10 +57,10 @@ button {
             <!--Titulo-->
             <div style="display: flex">
                 <p style="width: 80%; text-align:center">Robo Sumo LabMaker Team V0.1</p>
-                <p style="width: 20%; text-align:center">Latency: 100 ms</p>
+                <p style="width: 20%; text-align:center" id="indicator_latency">Latency: 100 ms</p>
             </div>
             <!--Canvas-->
-            <canvas width="300" height="280" style="width: 100%; height: 90%; background-color: rgb(134, 134, 134); padding: 0%"></canvas>
+            <canvas width="600" height="600" id="canvas" style="width: 100%; height: 90%; background-color: #121212 ; padding: 0%"></canvas>
 
             
         </div>
@@ -114,17 +114,17 @@ button {
                 <div style="display: flex; text-align: center;">
                     <p class="info_text" style="width: 10%">5</p>
                     <p class="info_text" id="indicator_channel_5_raw">1500</p>
-                    <p class="info_text" id="indicator_channel_5_calibration_min">-</p>
-                    <p class="info_text" id="indicator_channel_5_calibration_max">-</p>
-                    <button class="info_text"id="input_calibrate_channel_5">OFF</button> 
+                    <p class="info_text">-</p>
+                    <p class="info_text">-</p>
+                    <p class="info_text">-</p>
                 </div>
                 <!-- Canal 6 -->
                 <div style="display: flex; text-align: center;">
                     <p class="info_text" style="width: 10%">6</p>
                     <p class="info_text" id="indicator_channel_6_raw">1500</p>
-                    <p class="info_text" id="indicator_channel_6_calibration_min">-</p>
-                    <p class="info_text" id="indicator_channel_6_calibration_max">-</p>
-                    <button class="info_text"id="input_calibrate_channel_6">OFF</button> 
+                    <p class="info_text">-</p>
+                    <p class="info_text">-</p>
+                    <p class="info_text">-</p>
                 </div>
             </div>
             <!-- Customização de controles -->
@@ -144,7 +144,7 @@ button {
                 </div>
                 <!-- Customização -->
                 <div style="display: flex; text-align: center;">
-                    <select class="info_text" name="cars" id="cars" style="width: 15%; text-align: center">
+                    <select class="info_text" name="throttle_channel" id="input_throttle_channel" style="width: 15%; text-align: center">
                         <option value="1">Ch 1</option>
                         <option value="2">Ch 2</option>
                         <option value="3">Ch 3</option>
@@ -152,9 +152,9 @@ button {
                         <option value="5">Ch 5</option>
                         <option value="6">Ch 6</option>
                     </select>
-                    <input class="info_text" type="number">
-                    <input class="info_text" style="height: auto;" type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                    <select class="info_text" name="cars" id="cars"  style="text-align: center">
+                    <input class="info_text" type="number" id="input_throttle_linearity">
+                    <input class="info_text" style="height: auto;" type="checkbox" id="input_reverse_button" name="reverse_button" value="yes">
+                    <select class="info_text" name="reverse_channel" id="input_reverse_channel"  style="text-align: center">
                         <option value="1">Ch 1</option>
                         <option value="2">Ch 2</option>
                         <option value="3">Ch 3</option>
@@ -162,14 +162,14 @@ button {
                         <option value="5">Ch 5</option>
                         <option value="6">Ch 6</option>
                     </select>
-                    <button class="info_text" style="width: 15%" id="input_calibrate_channel_1">Send</button> 
+                    <button class="info_text" style="width: 15%" id="input_throttle_send">Send</button> 
                 </div>
                 <!-- FeedBack -->
                 <div style="display: flex; text-align: center;">
-                    <p class="info_text" style="width: 15%">Ch 1</p>
-                    <p class="info_text">0.95</p>
-                    <p class="info_text">0</p>
-                    <p class="info_text">Ch 6</p>
+                    <p class="info_text" id="indicator_throtle_channel" style="width: 15%">Ch 1</p>
+                    <p class="info_text" id="indicator_throtle_linearity">0.95</p>
+                    <p class="info_text" id="indicator_throtle_isbutton">0</p>
+                    <p class="info_text" id="indicator_throtle_reverse_channel">Ch 6</p>
                     <p class="info_text" style="width: 15%">-</p>
                 </div>
             </div>  
@@ -188,7 +188,7 @@ button {
                 </div>
                 <!-- Customização -->
                 <div style="display: flex; text-align: center;">
-                    <select class="info_text" name="cars" id="cars" style="width: 50%; text-align: center">
+                    <select class="info_text" name="turn_channel" id="input_turn_channel" style="width: 50%; text-align: center">
                         <option value="1">Ch 1</option>
                         <option value="2">Ch 2</option>
                         <option value="3">Ch 3</option>
@@ -196,13 +196,13 @@ button {
                         <option value="5">Ch 5</option>
                         <option value="6">Ch 6</option>
                     </select>
-                    <input class="info_text" type="number">
-                    <button class="info_text" id="input_calibrate_channel_1">Send</button> 
+                    <input class="info_text" type="number" id="input_turn_linearity">
+                    <button class="info_text" id="input_turn_send">Send</button> 
                 </div>
                 <!-- FeedBack -->
                 <div style="display: flex; text-align: center;">
-                    <p class="info_text" style="width: 50%">Ch 1</p>
-                    <p class="info_text">0.95</p>
+                    <p class="info_text" id="indicator_turn_channel" style="width: 50%">Ch 1</p>
+                    <p class="info_text" id="indicator_turn_linearity">0.95</p>
                     <p class="info_text">-</p>
                 </div>
             </div>  
@@ -250,6 +250,42 @@ button {
 </body>
 
 <script>
+
+    var controller_x = 50;
+    var controller_y = 200;
+    var controller_width = 250;  
+    var controller_height = 150;
+    var controller_antenna_length = 100;
+    var controller_antenna_width = 10;
+    var stick_size = 60;
+    var stick_indicator_size = 8;
+    var left_stick_x = 0;
+    var left_stick_y = 0;
+    var right_stick_x = 0;
+    var right_stick_y = 0;
+
+    setInterval(renderScene(), 100);
+
+    function renderScene(){
+        var c = document.getElementById("canvas");
+        var canvas = c.getContext("2d");
+        canvas.fillStyle = "orange";
+        canvas.fillRect(controller_x, controller_y, controller_width, controller_height);
+        canvas.fillStyle = "white";
+        canvas.fillRect(controller_x + controller_width/2 - controller_antenna_width/2, controller_y - controller_antenna_length, controller_antenna_width, controller_antenna_length);
+        
+        // Sticks
+        canvas.fillStyle = "gray";
+        canvas.fillRect(controller_x + controller_width/4 - stick_size/2, controller_y + controller_height/2 - stick_size/2, stick_size, stick_size);
+        canvas.fillRect(controller_x + 3*controller_width/4 - stick_size/2, controller_y + controller_height/2 - stick_size/2, stick_size, stick_size);
+
+        // Sticks  Indicators 
+        canvas.fillStyle = "red";
+        canvas.fillRect(controller_x + controller_width/4 - stick_indicator_size/2 + left_stick_x, controller_y + controller_height/2 - stick_indicator_size/2 - left_stick_y, stick_indicator_size, stick_indicator_size);
+        canvas.fillRect(controller_x + 3*controller_width/4 - stick_indicator_size/2 + right_stick_x, controller_y + controller_height/2 - stick_indicator_size/2 - right_stick_y, stick_indicator_size, stick_indicator_size);
+        canvas.stroke();
+    }
+
 </script>
 
 </html>
