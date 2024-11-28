@@ -9,10 +9,9 @@ class Receiver{
     uint16_t activeTime[8] = {0,0,0,0,0,0,0,0};
     
     
-    uint16_t calibration_min[8] = {990, 1000, 1000, 1000, 1000, 1000, 1000, 1000};
-    uint16_t calibration_mid[8] = {1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500};
-    uint16_t calibration_max[8] = {1800, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
-    uint8_t calibrationMask = 0b00000000; // Mascara de calibração dos sensores
+    uint16_t calibration_min[8] = {1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000};
+    uint16_t calibration_max[8] = {2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
+    uint8_t isCalibrating[8] = {0,0,0,0,0,0,0,0};
 
     public:
     Receiver(uint8_t pin_c1, uint8_t pin_c2, uint8_t pin_c3, uint8_t pin_c4, uint8_t pin_c5, uint8_t pin_c6, uint8_t pin_c7, uint8_t pin_c8){
@@ -24,7 +23,6 @@ class Receiver{
         pin_channel[5] = pin_c6;
         pin_channel[6] = pin_c7;
         pin_channel[7] = pin_c8;
-        
     };
 
     void begin(){
@@ -44,13 +42,13 @@ class Receiver{
 
     void update(){
         for(int i = 0; i < 8; i++){
-            if(read(i) > calibration_max[i] && read(i) < 2100){
-                calibration_max[i] = read(i);
-                calibration_mid[i] = (calibration_max[i] + calibration_min[i]) / 2;
-            }
-            if(read(i) < calibration_min[i] && read(i) > 900){
-                calibration_min[i] = read(i);
-                calibration_mid[i] = (calibration_max[i] + calibration_min[i]) / 2;
+            if(isCalibrating[i]){
+                if(read(i) > calibration_max[i] && read(i) < 2200){
+                    calibration_max[i] = read(i);
+                }
+                if(read(i) < calibration_min[i] && read(i) > 800){
+                    calibration_min[i] = read(i);
+                }
             }
         }
     }
@@ -83,18 +81,27 @@ class Receiver{
         // Reseta as calibrações de todo mundo
         calibration_max[channel] = 1000;
         calibration_min[channel] = 2000;
-        calibration_mid[channel] = 1500;
+    }
+
+    void enableCalibration(uint8_t channel){
+        isCalibrating[channel] = 1;
+    }
+
+    void disableCalibration(uint8_t channel){
+        isCalibrating[channel] = 0;
+    }
+
+    void setCalibrationMin(uint8_t channel, uint16_t value){
+        calibration_min[channel] = value;
+    }
+
+    void setCalibrationMax(uint8_t channel, uint16_t value){
+        calibration_max[channel] = value;
     }
 
     uint16_t getMin(int channel){
         return calibration_min[channel];
     }
-
-    
-    uint16_t getMid(int channel){
-        return calibration_mid[channel];
-    }
-
     
     uint16_t getMax(int channel){
         return calibration_max[channel];

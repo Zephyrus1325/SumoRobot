@@ -1,8 +1,8 @@
- #pragma once
+#pragma once
 #include <Arduino.h>
 
 /*-------------------------------------------------------------------+
-|    Classe de motor - Marco Aurélio (16/10/2024)                    |
+|    Classe de motor - Marco Aurélio (19/10/2024)                    |
 |                                                                    |
 |   Arquivo com a classe de motor                                    |
 |   Possui todos os parametros para controlar um motor adequadamente |
@@ -12,12 +12,12 @@
 class Motor{
     private:
     // Pinagem do motor
-    unsigned int dirAPin; // Pino de direção A
-    unsigned int dirBPin; // Pino de direção B
-    unsigned int pwmPin;  // Pino de controle de potência
+    uint8_t dirAPin; // Pino de direção A
+    uint8_t dirBPin; // Pino de direção B
+    uint8_t pwmPin;  // Pino de controle de potência
 
     public:
-    Motor(unsigned int dirA, unsigned int dirB, unsigned int pwm) : dirAPin(dirA), dirBPin(dirB), pwmPin(pwm){}
+    Motor(uint8_t dirA, uint8_t dirB, uint8_t pwm) : dirAPin(dirA), dirBPin(dirB), pwmPin(pwm){}
  
     // Inicializador do motor
     void begin(){
